@@ -1,15 +1,6 @@
-package com.marvel.rpg.entitys;
+package com.marvel.rpg.dtos;
 
-import com.marvel.rpg.dtos.NewAttributeDTO;
-
-import javax.persistence.*;
-
-@Entity
-public class Attribute {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class UpdateAttributeDTO {
 
     private Double healthPoints;
     private Double vigor;
@@ -19,42 +10,6 @@ public class Attribute {
     private Double resistence;
     private Double charisma;
     private Double perception;
-
-    public Attribute() {
-    }
-
-    public Attribute(Long id, Double healthPoints, Double vigor, Double strength, Double intelligence, Double agility,
-                     Double resistence, Double charisma, Double perception) {
-        this.id = id;
-        this.healthPoints = healthPoints;
-        this.vigor = healthPoints * 200.0;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.agility = agility;
-        this.resistence = resistence;
-        this.charisma = charisma;
-        this.perception = perception;
-    }
-
-    public Attribute(NewAttributeDTO newAttributeDTO) {
-        this.healthPoints = newAttributeDTO.getHealthPoints();
-        this.vigor = newAttributeDTO.getHealthPoints() * 200;
-        this.strength = newAttributeDTO.getStrength();
-        this.intelligence = newAttributeDTO.getIntelligence();
-        this.agility = newAttributeDTO.getAgility();
-        this.resistence = newAttributeDTO.getResistence();
-        this.charisma = newAttributeDTO.getCharisma();
-        this.perception = newAttributeDTO.getPerception();
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Double getHealthPoints() {
         return healthPoints;
@@ -119,5 +74,4 @@ public class Attribute {
     public void setPerception(Double perception) {
         this.perception = perception;
     }
-
 }

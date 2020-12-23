@@ -28,7 +28,7 @@ public class CharacterController {
     public ResponseEntity getCharacters() {
         ResponseEntity response;
         if(this.repository.count() > 0) {
-            response = ResponseEntity.ok(repository);
+            response = ResponseEntity.ok(repository.findAll());
         } else {
             response = ResponseEntity.noContent().build();
         }
@@ -37,8 +37,8 @@ public class CharacterController {
 
     @GetMapping("/{id}")
     public ResponseEntity getCharacter(@PathVariable Long id) {
-        Optional<Character> searchCharacter = this.repository.findById(id);
         ResponseEntity response;
+        Optional<Character> searchCharacter = this.repository.findById(id);
         if(searchCharacter.isPresent()) {
             response = ResponseEntity.ok(searchCharacter.get());
         } else {
@@ -57,13 +57,24 @@ public class CharacterController {
             update.setIdentity(updateCharacter.getIdentity());
             update.setGender(updateCharacter.getGender());
             update.setAge(updateCharacter.getAge());
-
+            update.setHeight(updateCharacter.getHeight());
             this.repository.save(update);
             response = ResponseEntity.ok(update);
         } else {
             response = ResponseEntity.notFound().build();
         }
+        return response;
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteCharacter(@PathVariable Long id) {
+        ResponseEntity response;
+        if(this.repository.existsById(id)) {
+            repository.deleteById(id);
+            response = ResponseEntity.ok("Character deleted successfully!");
+        } else {
+            response = ResponseEntity.notFound().build();
+        }
         return response;
     }
 

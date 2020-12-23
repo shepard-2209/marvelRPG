@@ -1,6 +1,8 @@
 package com.marvel.rpg.entitys;
 
 import com.marvel.rpg.dtos.NewCharacterDTO;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class Character {
     private Double height;
 
     @OneToOne
+    @Nullable
     private Attribute attributes;
 
     public Character() {
